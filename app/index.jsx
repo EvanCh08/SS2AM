@@ -1,29 +1,28 @@
-import { View, Image } from 'react-native';
-import { Text, Button, TextInput } from 'react-native-paper';
+import { View } from 'react-native';
+import { Text, Button } from 'react-native-paper';
+import { Link } from "expo-router";
 import { supabase } from '../lib/supabase';
-import { useState } from 'react';
 
-
-function TopView() {
+export default function Choose() {
     return (
-        <View style={{margin:40, flexDirection: 'row', backgroundColor: "#e4e7d1"}}>
-            <Image 
-                style={{height: 80, width: 350, marginLeft: 15, marginTop: 10}}
-                source={{uri: "/Users/evandarrenchristanto/Downloads/splitrr.jpeg"}}/>
+        <View style={{ flex: 1, backgroundColor:'#e4e7d1', justifyContent: 'center', alignItems: 'center'}}>
+            <View>
+                <Text style={{fontWeight: 'bold', fontSize: 20, justifyContent: 'center', alignItems: 'center', marginBottom: 30, textAlign: 'center'}}>Login as ... </Text>
+                <View style={{flexDirection: 'row'}}>
+                    <View style={{marginRight: 10}}>
+                        <Link href="/customer">
+                            <Button mode='contained' buttonColor="#394d46">Customer</Button>
+                        </Link>
+                    </View>
+                    <View>
+                        <Link href="/restaurant">
+                            <Button mode='contained' buttonColor="#394d46">Restaurant</Button>
+                        </Link>
+                    </View>
+                    
+                </View>
+                <Button onPress={() => supabase.auth.signOut()} mode='contained' buttonColor="#ff6961" style={{marginTop: 20}}>Logout</Button>
+            </View>
         </View>
     )
-}
-
-export default function HomePage() {
-    const [text, setText] = useState('');
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#e4e7d1"}}>
-            <TopView />
-            <Text style={{fontWeight: 'bold', fontSize: 17, color:'#394d46'}}>How many people are there?</Text>
-            <TextInput value={text} onChangeText={setText} style={{marginTop: 20, backgroundColor: '#e4e7d1'}}/>
-            <Button mode='contained' buttonColor="#394d46" style={{marginTop: 30}}>Next</Button>
-            <Button onPress={() => supabase.auth.signOut()} mode='contained' buttonColor="#ff6961" style={{marginTop: 20}}>Logout</Button>
-        </View>
-    );
-    
 }
