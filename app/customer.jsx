@@ -4,8 +4,8 @@ import { supabase } from '../lib/supabase';
 import { useState } from 'react';
 import { Link } from "expo-router";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation  } from 'expo-router';
-
+import { v4 as uuidv4 } from 'uuid';
+import 'react-native-get-random-values';
 
 function TopView() {
     return (
@@ -21,7 +21,6 @@ export default function HomePage() {
     const [text, setText] = useState('');
     const [error, setError] = useState(null);
     const [restId, setRestId] = useState('')
-    const [temp, setTemp] = useState('');
     const [pass, setPass] = useState([])
     
 
@@ -45,7 +44,23 @@ export default function HomePage() {
 
     const inputRestId = async () => {
         try {
+            const numberOfCustomers = parseInt(text);
+            console.log(numberOfCustomers)
+            const newCustomers = []
+    
+            for (let i = 1; i < numberOfCustomers + 1; i++) {
+                const custID = uuidv4();
+                const customer = {
+                    name: 'C' + i,
+                    menus: {}, 
+                    id: custID,
+                }
+                newCustomers.push(customer)
+            }
+            console.log(newCustomers)
             await AsyncStorage.setItem('restId', restId)
+            await AsyncStorage.setItem('customers', JSON.stringify(newCustomers))
+            //await AsyncStorage.setItem('number', text)
         } catch (error) {
             setError(error)
         }
@@ -71,7 +86,7 @@ export default function HomePage() {
                     buttonColor="#394d46"> 
                 OK 
             </Button>
-            <Link href="/menuchoose">
+            <Link href="/splitandcombine">
                 <Button mode="contained" 
                         buttonColor="#394d46">Next</Button>
             </Link>
@@ -82,5 +97,3 @@ export default function HomePage() {
     );
     
 }
-
-
