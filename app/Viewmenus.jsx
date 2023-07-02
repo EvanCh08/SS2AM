@@ -29,6 +29,32 @@ export default function ViewMenu() {
         }
     }
 
+    const removeMenu = async (index) => {
+        try {
+            const menuId = data[index].menu; // Assuming `id` is the unique identifier field
+    
+            const { error } = await supabase
+                .from('menu')
+                .delete()
+                .eq('menu', menuId);
+    
+            if (error) {
+                console.log(error);
+                // Handle the error
+            } else {
+                // Remove the item from the state after successful deletion
+                const newData = [...data];
+                newData.splice(index, 1);
+                setData(newData);
+            }
+        } catch (error) {
+            console.log(error);
+            // Handle any other errors that occurred during the execution
+        }
+
+
+    };
+
     useEffect(() => {fetchData()}, []);
 
     return (
@@ -36,7 +62,7 @@ export default function ViewMenu() {
             <FlatList 
                 keyExtractor={(item) => item.menu}
                 data={data}
-                renderItem={({item}) => { 
+                renderItem={({item, index}) => { 
                     return (
                         <View style={{alignItems:'left', marginTop: 20}}>
                             <View style={{alignItems: 'left', marginRight: 300}}>
@@ -46,6 +72,7 @@ export default function ViewMenu() {
                             <View>
                                 <Text style={{textAlign: 'left', fontWeight:'bold', fontSize: 15}}>${item.price}</Text>
                             </View>
+                            <Button mode="contained" onPress={() => removeMenu(index)}>Remove menu</Button>
                         </View>
                     )
                 }}
