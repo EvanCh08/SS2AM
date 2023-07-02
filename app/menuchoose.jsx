@@ -5,10 +5,15 @@ import { Link } from "expo-router";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase } from '../lib/supabase';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useRoute } from '@react-navigation/native';
 
 export default function Menus() {
     const [data, setData] = useState([]);
-  
+    //const [temp, setTemp] = useState([])
+    //const [finalData, setFinalData] = useState([{menu: "Ayam", price: "5"}, {menu: "Janggut", price: "5"}])
+    const route = useRoute();
+    const { customerId } = route.params;
+
     const fetchData2 = async () => {
         try {
             const durdul = await AsyncStorage.getItem('restId');
@@ -51,6 +56,15 @@ export default function Menus() {
         });
     }, []);
 
+    const handleSubmit = async () => {
+        try {
+            await AsyncStorage.setItem(customerId, JSON.stringify(data))
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
     return (
         
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#e4e7d1"}}>
@@ -68,16 +82,17 @@ export default function Menus() {
                             <View>
                                 <Text style={{textAlign: 'left', fontWeight:'bold', fontSize: 15}}>${item.price}</Text>
                             </View>
-                            
+                        
                             <View style={{flexDirection: 'row', marginLeft: 200}}>
                                 <Button onPress={() => increaseCounter(index)} style={{marginBottom: 10}}>
-                                <AntDesign name='pluscircleo' style={{color: 'black', fontSize: 20}}/>
+                                    <AntDesign name='pluscircleo' style={{color: 'black', fontSize: 20}}/>
                                 </Button>
                                 <Text>{item.counter}</Text>
                                 <Button onPress={() => decreaseCounter(index)} style={{marginBottom: 10}}>
                                     <AntDesign name='minuscircleo' style={{color: 'black', fontSize: 20}}/>
                                 </Button>
                             </View>
+                        
                         </View>
 
 
@@ -91,6 +106,12 @@ export default function Menus() {
                     <Button mode="contained" buttonColor='#394d46'>Back</Button>
                 </Link>
             </View>
+            <Button onPress={handleSubmit}>
+                Save Data
+            </Button>
+            <Link href="/allcustomers">
+                <Button>Back to allcustomers</Button>
+            </Link>
         </View>
     )
 }
