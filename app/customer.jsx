@@ -11,7 +11,7 @@ function TopView() {
     return (
         <View style={{margin:40, flexDirection: 'row', backgroundColor: "#e4e7d1"}}>
             <Image 
-                style={{height: 80, width: 350, marginLeft: 15, marginTop: 10}}
+                style={{height: 70, width: 300, marginLeft: 15, marginTop: 10}}
                 source={{uri: "/Users/evandarrenchristanto/Downloads/splitrr.jpeg"}}/>
         </View>
     )
@@ -35,7 +35,6 @@ export default function HomePage() {
             setPass(final)
             console.log(pass)
 
-            // eslint-disable-next-line no-undef
             alert("Data has been saved succesfullly!")
         }
 
@@ -57,7 +56,6 @@ export default function HomePage() {
                 }
                 newCustomers.push(customer)
             }
-            console.log(newCustomers)
             await AsyncStorage.setItem('restId', restId)
             await AsyncStorage.setItem('customers', JSON.stringify(newCustomers))
             //await AsyncStorage.setItem('number', text)
@@ -97,3 +95,5 @@ export default function HomePage() {
     );
     
 }
+
+
