@@ -33,21 +33,21 @@ export default function LoginPage() {
                 Welcome to
             </Text>
             <Image 
-                style={{height: 80, width: 350, marginLeft: 15, marginTop: 10}}
+                style={{height: 70, width: 300, marginLeft: 40, marginTop: 10}}
                 source={{uri: "/Users/evandarrenchristanto/Downloads/splitrr.jpeg"}}/>
             <View style={{ marginTop: 10 }}>
                 <Text style={{ fontSize: 12, textAlign:'center', color:'#c4cc9a'}}>Please log in before you proceed to the application</Text>
             </View>
             <View style={{flex: 1, justifyContent:'center'}}>
-                <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:20, color:"#394d46", marginTop: 15}}>Email</Text>
+                <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:20, color:"#394d46"}}>Email</Text>
                 <TextInput
                     autoCapitalize='none'
                     textContentType='emailAddress'
                     value={email}
                     onChangeText={setEmail}
                     backgroundColor="#e4e7d1"
-                    placeholder="Enter your email..." 
-                    activeOutlineColor="black"/>
+                    activeOutlineColor="black"
+                    activeUnderlineColor="#394d46"/>
                 <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:20, color: "#394d46", marginTop: 20}}>Password</Text>
                 <TextInput
                     secureTextEntry
@@ -56,7 +56,8 @@ export default function LoginPage() {
                     value={password}
                     onChangeText={setPassword}
                     backgroundColor="#e4e7d1"
-                    placeholder="Enter your password..."/>
+                    activeUnderlineColor="#394d46"
+                    />
                 <View style={{marginBottom: 30, marginTop: 35, justifyContent: 'center', alignItems: 'center'}}>
                     <Button onPress={handleSubmit} mode='contained' buttonColor="#394d46">Submit</Button>
                     {errMsg !== "" && <Text>{errMsg}</Text>}
@@ -64,7 +65,7 @@ export default function LoginPage() {
 
                     <View style={{marginTop: 15, justifyContent: 'center', alignItems: 'center'}}>
                         <Link href="/register">
-                        <Button mode='contained' buttonColor="#394d46" loading="true">Dont have an account yet? Go to register!</Button>
+                            <Button mode='contained' buttonColor="#394d46" loading="true">Dont have an account yet? Go to register!</Button>
                         </Link>
                     </View>
                 </View>
