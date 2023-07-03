@@ -8,10 +8,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function Menus() {
     const [data, setData] = useState([]);
-    //const [temp, setTemp] = useState([])
-    //const [finalData, setFinalData] = useState([{menu: "Ayam", price: "5"}, {menu: "Janggut", price: "5"}])
-    
-
     const fetchData2 = async () => {
         try {
             const durdul = await AsyncStorage.getItem('restId');
@@ -59,10 +55,13 @@ export default function Menus() {
         try {
             const combinedPrice = data.reduce((total, item) => total + (item.counter * item.price), 0);
             await AsyncStorage.setItem('totalPrice', combinedPrice.toString())
+            await AsyncStorage.setItem('orderSummary', JSON.stringify(data))
         } catch (error) {
             console.log(error)
         }
     }
+
+
 
 
     return (
@@ -101,20 +100,27 @@ export default function Menus() {
                 style={{flex: 1, marginTop: 50}}
             />
             
-            <View style={{marginBottom: 40}}>
+            <View style={{marginBottom: 5, marginTop: 10}}>
                 <Link href="/customer">
                     <Button mode="contained" buttonColor='#394d46'>Back</Button>
                 </Link>
             </View>
 
-            <Button onPress={handlePress}>
-                Save Data
+            <Button onPress={handlePress} mode="contained" buttonColor='#394d46' style={{marginBottom: 10}}>
+                <AntDesign name='save' style={{color: 'white', fontSize: 15}}/>
+                <Text style={{color: 'white'}}> Save Data</Text>
             </Button>
-            <Link href="/totalbill">
-                <Button>
-                    See total bill here!
-                </Button>
-            </Link>
+
+            <View style={{marginBottom: 10}}>
+                <Link href="/totalbill">
+                    <Button mode="contained" buttonColor='#394d46'>
+                        <AntDesign name='' style={{color: 'white', fontSize: 15}}/>
+                        <Text style={{color: 'white'}}>See total bill here!</Text>
+                    </Button>
+                </Link>
+                
+            </View>
+            
         </View>
     )
 }
