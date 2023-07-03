@@ -24,21 +24,7 @@ export default function All() {
     const handleNavigation2 = ( customerId ) => {
         navigation.navigate('evan', { customerId })
     }
-
-    const printData = async ( customerId ) => {
-        try {
-            const cok = JSON.parse(await AsyncStorage.getItem(customerId))
-            console.log(cok)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    /*<Button buttonColor="#394d46" onPress={() => handleNavigation(item.id)} mode="contained" style={[styles.button, { marginLeft: 50 }]} labelStyle={styles.buttonText}>Go</Button>
-                            <Button buttonColor="#394d46" onPress={() => printData(item.id)} mode="contained" style={[styles.button, { marginLeft: 40 }]} labelStyle={styles.buttonText}>Print!</Button>
-                            <Button buttonColor="#394d46" onPress={() => handleNavigation2(item.id)} mode="contained" style={[styles.button, { marginLeft: 30 }]}
-                labelStyle={styles.buttonText}>Order Summary</Button>
-                */
+    
     useEffect(() => {handleCustomers()}, []);
 
     return (
@@ -49,13 +35,13 @@ export default function All() {
                 renderItem={({item, index}) => {
                     return (   
                         <View style={styles.itemContainer}>
-                            <Text style={{fontWeight: 'bold', fontSize: 30}}>{item.name}</Text>
+                            <Text style={{fontWeight: 'bold', fontSize: 30, marginLeft: 10}}>{item.name}</Text>
                             <TouchableOpacity onPress={() => handleNavigation(item.id)} style={styles.button}>
                                 <Text style={styles.buttonText}>Go</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => handleNavigation2(item.id)}
-                                style={styles.button}
+                                style={[styles.button,]}
                             >
                                 <Text style={styles.buttonText}>Order Summary</Text>
                             </TouchableOpacity>
@@ -66,11 +52,11 @@ export default function All() {
                     
                 }}/>
 
-            <Link href="/customer">                    
-                <Button>
-                    press me
-                </Button>
-            </Link>
+            <View style={{marginBottom: 40}}>
+                <Link href="/splitandcombine">
+                    <Button mode="contained" buttonColor='#394d46'>Back</Button>
+                </Link>
+            </View>
                             
             
         </View>
@@ -80,7 +66,9 @@ export default function All() {
 
 const styles = StyleSheet.create({
     container: {
+        
       flex: 1,
+    
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#e4e7d1',
