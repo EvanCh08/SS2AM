@@ -1,4 +1,4 @@
-import { View, FlatList } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -65,22 +65,22 @@ export default function ViewMenu() {
                 renderItem={({item, index}) => { 
                     return (
                         <View style={{alignItems:'left', marginTop: 20}}>
-                            <View style={{alignItems: 'left', marginRight: 300}}>
+                            <View style={{alignItems: 'left', marginRight: 275}}>
                                 <Text style={{fontWeight:'bold', fontSize: 20}}>{item.menu}</Text>
                             </View>
 
                             <View>
                                 <Text style={{textAlign: 'left', fontWeight:'bold', fontSize: 15}}>${item.price}</Text>
                             </View>
-                            <Button mode="contained" onPress={() => removeMenu(index)}>Remove menu</Button>
+                            <Button mode="contained" onPress={() => removeMenu(index)} style={{fontSize: 5, marginTop: 10}} buttonColor='#394d46'>Remove Menu</Button>
                         </View>
                     )
                 }}
                 style={{flex: 1, marginTop: 40}}
             />
-            <View style={{marginBottom: 40}}>
+            <View style={{marginBottom: 20, marginTop: 20}}>
                 <Link href="/restaurant">
-                    <Button mode='contained' buttonColor='#394d46'>Back to restaurant</Button>
+                    <Button mode='contained' buttonColor='#394d46'>Back to Restaurant</Button>
                 </Link>
             </View>
             
@@ -89,3 +89,51 @@ export default function ViewMenu() {
 
 
 }
+
+const styles = StyleSheet.create({
+    container: {
+      marginTop: 30,
+      paddingHorizontal: 16,
+      backgrounColor: "#e4e7d1"
+    },
+    itemContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 16,
+    },
+    menuContainer: {
+      flex: 1,
+      alignItems: 'flex-start',
+    },
+    menuText: {
+      fontWeight: 'bold',
+      fontSize: 20,
+    },
+    priceContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 8,
+      marginRight: 16,
+    },
+    priceText: {
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: 15,
+    },
+    counterContainer: {
+      borderWidth: 1,
+      borderColor: 'gray',
+      paddingHorizontal: 8,
+      paddingVertical: 4,
+      borderRadius: 4,
+    },
+    counterText: {
+      fontSize: 15,
+    },
+    totalText: {
+      marginTop: 20,
+      fontWeight: 'bold',
+      fontSize: 18,
+      textAlign: 'center',
+    },
+  });
