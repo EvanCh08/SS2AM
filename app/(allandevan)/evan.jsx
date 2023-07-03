@@ -59,8 +59,10 @@ export default function Confirm() {
                 }}
                 
             />
-
-            <Text styles={styles.totalText}>Total Price: ${numb}</Text>
+            <View style={{marginBottom: 15}}>
+                <Text styles={styles.totalText}>Total Price: ${numb}</Text>
+            </View>
+            
         </View>
     )
 }
@@ -71,14 +73,17 @@ export default function Confirm() {
 
 const styles = StyleSheet.create({
     container: {
-      marginTop: 30,
       paddingHorizontal: 16,
-      backgrounColor: "#e4e7d1"
+      backgrounColor: "#e4e7d1", 
+      flex: 1,
+      
+      
     },
     itemContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: 16,
+      marginBottom: 6,
+      marginTop: 10
     },
     menuContainer: {
       flex: 1,
@@ -87,17 +92,20 @@ const styles = StyleSheet.create({
     menuText: {
       fontWeight: 'bold',
       fontSize: 20,
+      color: "#394d46"
     },
     priceContainer: {
       alignItems: 'center',
       justifyContent: 'center',
       paddingHorizontal: 8,
       marginRight: 16,
+
     },
     priceText: {
       textAlign: 'center',
       fontWeight: 'bold',
       fontSize: 15,
+      
     },
     counterContainer: {
       borderWidth: 1,
@@ -108,11 +116,11 @@ const styles = StyleSheet.create({
     },
     counterText: {
       fontSize: 15,
+      color: "#394d46"
     },
     totalText: {
-      marginTop: 20,
+      marginBottom: 50,
       fontWeight: 'bold',
-      fontSize: 18,
       textAlign: 'center',
     },
   });
