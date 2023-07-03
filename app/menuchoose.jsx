@@ -82,49 +82,7 @@ export default function Menus() {
         const userData = JSON.parse(await AsyncStorage.getItem(tuyul))
         console.log(userData)
     }
-/*
-                        <View>
-                            <View style={{textAlign: 'left', marginRight: 50}}>
-                                <Text style={{fontWeight:'bold', fontSize: 20}}>{item.menu}</Text>
-                            </View>
 
-                            <View style={{textAlign: 'center', marginBottom: 20}}>
-                                <Text style={{textAlign: 'center', fontWeight:'bold', fontSize: 20}}>({item.price})</Text>
-                            </View>
-                            
-                            <View style={{flexDirection: 'row', marginLeft: 40}}>
-                                <Button onPress={() => increaseCounter(index)} style={{marginBottom: 10}}>
-                                <AntDesign name='pluscircleo' style={{color: 'black', fontSize: 20}}/>
-                                </Button>
-                                <Text>{item.counter}</Text>
-                                <Button onPress={() => decreaseCounter(index)} style={{marginBottom: 10}}>
-                                    <AntDesign name='minuscircleo' style={{color: 'black', fontSize: 20}}/>
-                                </Button>
-                            </View>
-                        </View>
-                        */
-
-                        /*<View>
-                        <View style={{alignItems: 'left'}}>
-                            <Text style={{fontWeight:'bold', fontSize: 20}}>{item.menu}</Text>
-                        </View>
-
-                        <View>
-                            <Text style={{textAlign: 'left', fontWeight:'bold', fontSize: 15}}>${item.price}</Text>
-                        </View>
-                        
-                        <View style={{flexDirection: 'row', marginLeft: 200}}>
-                            <Button onPress={() => increaseCounter(index)} style={{marginBottom: 10}}>
-                            <AntDesign name='pluscircleo' style={{color: 'black', fontSize: 20}}/>
-                            </Button>
-                            <Text>{item.counter}</Text>
-                            <Button onPress={() => decreaseCounter(index)} style={{marginBottom: 10}}>
-                                <AntDesign name='minuscircleo' style={{color: 'black', fontSize: 20}}/>
-                            </Button>
-                        </View>
-                        
-                    </View>
-                    */
 
     return (
         
