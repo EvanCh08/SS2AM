@@ -14,6 +14,17 @@ export default function Menus() {
     const route = useRoute();
     const { customerId } = route.params;
 
+
+    const fetchData =  async () => {
+
+        const durdul = await AsyncStorage.getItem('restId')
+        console.log(durdul)
+        const userData = JSON.parse(await AsyncStorage.getItem(durdul))
+        setData(userData)
+        return userData;
+        
+    }
+
     const fetchData2 = async () => {
         try {
             const durdul = await AsyncStorage.getItem('restId');
@@ -37,6 +48,7 @@ export default function Menus() {
 
     }
 
+    //useEffect(() => {fetchData()}, []);
     useEffect(() => {fetchData2()}, []);
     
 
@@ -64,6 +76,55 @@ export default function Menus() {
         }
     }
 
+    const saveData = async () => {
+        const tuyul = await AsyncStorage.getItem('restId')
+        await AsyncStorage.setItem(tuyul, JSON.stringify(data))
+        const userData = JSON.parse(await AsyncStorage.getItem(tuyul))
+        console.log(userData)
+    }
+/*
+                        <View>
+                            <View style={{textAlign: 'left', marginRight: 50}}>
+                                <Text style={{fontWeight:'bold', fontSize: 20}}>{item.menu}</Text>
+                            </View>
+
+                            <View style={{textAlign: 'center', marginBottom: 20}}>
+                                <Text style={{textAlign: 'center', fontWeight:'bold', fontSize: 20}}>({item.price})</Text>
+                            </View>
+                            
+                            <View style={{flexDirection: 'row', marginLeft: 40}}>
+                                <Button onPress={() => increaseCounter(index)} style={{marginBottom: 10}}>
+                                <AntDesign name='pluscircleo' style={{color: 'black', fontSize: 20}}/>
+                                </Button>
+                                <Text>{item.counter}</Text>
+                                <Button onPress={() => decreaseCounter(index)} style={{marginBottom: 10}}>
+                                    <AntDesign name='minuscircleo' style={{color: 'black', fontSize: 20}}/>
+                                </Button>
+                            </View>
+                        </View>
+                        */
+
+                        /*<View>
+                        <View style={{alignItems: 'left'}}>
+                            <Text style={{fontWeight:'bold', fontSize: 20}}>{item.menu}</Text>
+                        </View>
+
+                        <View>
+                            <Text style={{textAlign: 'left', fontWeight:'bold', fontSize: 15}}>${item.price}</Text>
+                        </View>
+                        
+                        <View style={{flexDirection: 'row', marginLeft: 200}}>
+                            <Button onPress={() => increaseCounter(index)} style={{marginBottom: 10}}>
+                            <AntDesign name='pluscircleo' style={{color: 'black', fontSize: 20}}/>
+                            </Button>
+                            <Text>{item.counter}</Text>
+                            <Button onPress={() => decreaseCounter(index)} style={{marginBottom: 10}}>
+                                <AntDesign name='minuscircleo' style={{color: 'black', fontSize: 20}}/>
+                            </Button>
+                        </View>
+                        
+                    </View>
+                    */
 
     return (
         
@@ -101,17 +162,17 @@ export default function Menus() {
                 style={{flex: 1, marginTop: 50}}
             />
             
-            <View style={{marginBottom: 40}}>
-                <Link href="/customer">
-                    <Button mode="contained" buttonColor='#394d46'>Back</Button>
-                </Link>
-            </View>
-            <Button onPress={handleSubmit}>
+            
+            <Button onPress={handleSubmit} mode="contained" buttonColor='#394d46' style={{marginBottom: 10, marginTop: 10}}>
                 Save Data
             </Button>
-            <Link href="/allcustomers">
-                <Button>Back to allcustomers</Button>
-            </Link>
+            <View style={{marginBottom: 20}}>
+
+                <Link href="/allcustomers">
+                    <Button  mode="contained" buttonColor='#394d46'>Back to allcustomers</Button>
+                </Link>
+            </View>
+            
         </View>
     )
 }
