@@ -28,7 +28,7 @@ export default function Register() {
     }
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', backgroundColor: "#e4e7d1"}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#e4e7d1"}}>
             <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:20, color:"#394d46"}}>Email</Text>
             <TextInput
                 autoCapitalize='none'
@@ -36,7 +36,9 @@ export default function Register() {
                 value={email}
                 placeholder="Enter your email..."
                 backgroundColor="#e4e7d1"
-                onChangeText={setEmail} />
+                onChangeText={setEmail} 
+                activeOutlineColor="black"
+                activeUnderlineColor="#394d46"/>
             <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:20, color: "#394d46", marginTop: 20}}>Password</Text>
             <TextInput
                 secureTextEntry
@@ -45,7 +47,9 @@ export default function Register() {
                 value={password}
                 placeholder="Enter your password..."
                 backgroundColor="#e4e7d1"
-                onChangeText={setPassword} />
+                onChangeText={setPassword} 
+                activeOutlineColor="black"
+                activeUnderlineColor="#394d46"/>
             <View style={{marginBottom: 30, marginTop: 35, justifyContent: 'center', alignItems: 'center'}}>
                 <Button onPress={handleSubmit} mode='contained' buttonColor="#394d46">Submit</Button>
                 {errMsg !== "" && <Text>{errMsg}</Text>}
