@@ -21,6 +21,7 @@ export default function Restaurant() {
         setCanGo(false)
         setDoubleErr(false)
         setErr('')
+        setVerify('')
     }
     
 
