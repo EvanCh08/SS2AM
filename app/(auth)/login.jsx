@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Text, TextInput, Button, ActivityIndicator } from "react-native-paper";
 import { Link } from "expo-router";
 import { supabase } from "../../lib/supabase";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -12,18 +14,19 @@ export default function LoginPage() {
     const handleSubmit = async () => {
         setErrMsg('');
         if (email == '') {
-            setErrMsg("email cannot be empty")
+            setErrMsg("*Email can't be empty!*")
             return;
         }
         if (password == '') {
-            setErrMsg("password cannot be empty")
+            setErrMsg("*Password can't be empty!*")
             return;
         }
         setLoading(true);
         const { error } = await supabase.auth.signInWithPassword({ email, password });
+        await AsyncStorage.setItem('pass', password);
         setLoading(false);
         if (error) {
-            setErrMsg(error.message);
+            setErrMsg(error.message + "!");
             return;
         }
     }
@@ -34,11 +37,9 @@ export default function LoginPage() {
             </Text>
             <Image 
                 style={{height: 70, width: 300, marginLeft: 40, marginTop: 10}}
-                source={{uri: "/Users/evandarrenchristanto/Downloads/splitrr.jpeg"}}/>
-            <View style={{ marginTop: 10 }}>
-                <Text style={{ fontSize: 12, textAlign:'center', color:'#c4cc9a'}}>Please log in before you proceed to the application</Text>
-            </View>
-            <View style={{flex: 1, justifyContent:'center'}}>
+                source={require('../../assets/splitrr.jpeg')}/>
+            
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#e4e7d1"}}>
                 <Text style={{ textAlign:'center', fontWeight: 'bold', fontSize:20, color:"#394d46"}}>Email</Text>
                 <TextInput
                     autoCapitalize='none'
@@ -60,7 +61,7 @@ export default function LoginPage() {
                     />
                 <View style={{marginBottom: 30, marginTop: 35, justifyContent: 'center', alignItems: 'center'}}>
                     <Button onPress={handleSubmit} mode='contained' buttonColor="#394d46">Submit</Button>
-                    {errMsg !== "" && <Text>{errMsg}</Text>}
+                    {errMsg !== "" && <Text style={{color: "maroon", marginTop: 10, fontSize: 12}}>{errMsg}</Text>}
                     {loading && <ActivityIndicator />}
 
                     <View style={{marginTop: 15, justifyContent: 'center', alignItems: 'center'}}>
