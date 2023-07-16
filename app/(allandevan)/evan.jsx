@@ -1,4 +1,4 @@
-import { View, FlatList, Text, StyleSheet } from 'react-native';
+import { View, FlatList, Text, StyleSheet, Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState, useEffect } from 'react';
@@ -30,15 +30,20 @@ export default function Confirm() {
 
     }
 
-    useEffect(() => {fetchData()}, []);
+    useEffect(() => {fetchData()});
 
 
     return (
         <View style={[styles.container, {backgroundColor: "#e4e7d1"}]}>
+            <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
+                <Text style={{fontWeight: 'bold', fontSize: 17, marginBottom: 5, marginTop: 20, color: "#394d46"}}>Total Bill: </Text>
+                <Text style={{fontWeight:'bold', fontSize: 35, color: "#394d46"}}>${numb}</Text>
+                <Text style={{fontWeight: 'bold', marginTop: 5, color: "#394d46"}}>Please make your payment at the cashier!</Text>
+            </View>
             <FlatList 
                 keyExtractor={(item) => item.menu}
                 data={customers}
-                renderItem={({item, index}) => {
+                renderItem={({item}) => {
                     return (
                         <View style={styles.itemContainer}>
                             <View style={styles.menuContainer}>
@@ -59,9 +64,14 @@ export default function Confirm() {
                 }}
                 
             />
-            <View style={{marginBottom: 15}}>
-                <Text styles={styles.totalText}>Total Price: ${numb}</Text>
+            <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 10}}>
+               
+                <Image 
+                    style={{height: 20, width: 100, marginBottom: 30}}
+                    source={require('../../assets/splitrr.jpeg')}/>
+
             </View>
+            
             
         </View>
     )
