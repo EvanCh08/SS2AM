@@ -12,39 +12,21 @@ function TopView() {
         <View style={{margin:40, flexDirection: 'row', backgroundColor: "#e4e7d1"}}>
             <Image 
                 style={{height: 70, width: 300, marginLeft: 15, marginTop: 10}}
-                source={{uri: "/Users/evandarrenchristanto/Downloads/splitrr.jpeg"}}/>
+                source={require('../assets/splitrr.jpeg')}/>
         </View>
     )
 }
 
 export default function HomePage() {
     const [text, setText] = useState('');
-    const [error, setError] = useState(null);
-    const [restId, setRestId] = useState('')
-    const [pass, setPass] = useState([])
     
-
-
-    const handleOk =  async () => {
-        if (text == '' || restId == '') {
-            setError("Please insert a valid number!")
-            // eslint-disable-next-line no-undef
-            alert(error);
-        } else {
-            const final = JSON.parse(await AsyncStorage.getItem(restId))
-            setPass(final)
-            console.log(pass)
-
-            alert("Data has been saved succesfullly!")
-        }
-
-        
-    }
-
+    const [restId, setRestId] = useState('');
+    const [err, setErr] = useState('');
+    const [canNext, setCanNext] = useState(false)
+    
     const inputRestId = async () => {
         try {
             const numberOfCustomers = parseInt(text);
-            console.log(numberOfCustomers)
             const newCustomers = []
     
             for (let i = 1; i < numberOfCustomers + 1; i++) {
@@ -56,11 +38,27 @@ export default function HomePage() {
                 }
                 newCustomers.push(customer)
             }
+            
+            const { data, error } = await supabase
+                .from('menu')
+                .select('menu, price, counter')
+                .eq('uniqueId', restId);
+
+            if (data.length == 0) {
+                setErr("Restaurant ID not found!")
+                console.log(error)
+                setCanNext(false)
+                return;
+            } 
+
+            //tambahin error kalo restaurant id not found
             await AsyncStorage.setItem('restId', restId)
             await AsyncStorage.setItem('customers', JSON.stringify(newCustomers))
+            setErr('')
+            setCanNext(true)
             //await AsyncStorage.setItem('number', text)
         } catch (error) {
-            setError(error)
+            console.log(error)
         }
     }
 
@@ -78,16 +76,22 @@ export default function HomePage() {
                         onChangeText={setRestId} 
                         style={{backgroundColor: '#e4e7d1'}}
                         activeUnderlineColor="#394d46"/>
+             {err !== "" && <Text style={{color: "maroon", marginTop: 10, fontSize: 12}}>{err}</Text>}
+            
             <Button mode="contained" 
                     style={{marginTop: 40, marginBottom: 10}} 
                     onPress={inputRestId} 
                     buttonColor="#394d46"> 
                 OK 
             </Button>
-            <Link href="/splitandcombine">
-                <Button mode="contained" 
-                        buttonColor="#394d46">Next</Button>
-            </Link>
+            {canNext && (
+                <Link href="/splitandcombine">
+                    <Button mode="contained" buttonColor="#394d46">
+                        Next
+                    </Button>
+                </Link>
+            )}
+            
             <Button onPress={() => 
                 supabase.auth.signOut()} mode='contained' buttonColor="#ff6961" style={{marginTop: 20}}>Logout</Button>
 
