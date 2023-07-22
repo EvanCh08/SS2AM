@@ -7,7 +7,7 @@ export default function Split() {
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#e4e7d1"}}>
             <Image 
                 style={{height: 60, width: 250, marginBottom: 40}}
-                source={{uri: "/Users/evandarrenchristanto/Downloads/splitrr.jpeg"}}/>
+                source={require('../assets/splitrr.jpeg')}/>
 
             <View style={{marginBottom: 5}}>
                 <Link href="/allcustomers">
