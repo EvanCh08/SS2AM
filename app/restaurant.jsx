@@ -45,7 +45,6 @@ export default function Restaurant() {
             .from('menu')
             .insert([{ menu, price, uniqueId, counter}]);
             
-        console.log(uniqueId)
         
         await AsyncStorage.setItem('viewid', uniqueId);
 
