@@ -51,12 +51,12 @@ export default function HomePage() {
                 return;
             } 
 
-            //tambahin error kalo restaurant id not found
+            
             await AsyncStorage.setItem('restId', restId)
             await AsyncStorage.setItem('customers', JSON.stringify(newCustomers))
             setErr('')
             setCanNext(true)
-            //await AsyncStorage.setItem('number', text)
+            
         } catch (error) {
             console.log(error)
         }
