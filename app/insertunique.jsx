@@ -85,7 +85,6 @@ export default function Restaurant() {
                 return;
             }
         } catch (error) {
-            // Handle the error
             console.log(error);
         }
     };
