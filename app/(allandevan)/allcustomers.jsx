@@ -1,10 +1,11 @@
 import { View, FlatList, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
+import { supabase } from '../../lib/supabase';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import 'react-native-get-random-values';
-import { Link } from 'expo-router'
-import { Button } from 'react-native-paper'
+import { Link } from 'expo-router';
+import { Button } from 'react-native-paper';
 
 
 export default function All() {
@@ -24,7 +25,7 @@ export default function All() {
     const handleNavigation2 = ( customerId ) => {
         navigation.navigate('evan', { customerId })
     }
-    
+
     useEffect(() => {handleCustomers()}, []);
 
     return (
@@ -32,7 +33,7 @@ export default function All() {
             <FlatList
                 keyExtractor={(item) => item.name}
                 data={customers}
-                renderItem={({item, index}) => {
+                renderItem={({item}) => {
                     return (   
                         <View style={styles.itemContainer}>
                             <Text style={{fontWeight: 'bold', fontSize: 30, marginLeft: 10}}>{item.name}</Text>
@@ -52,12 +53,15 @@ export default function All() {
                     
                 }}/>
 
-            <View style={{marginBottom: 40}}>
+            <View style={{marginBottom: 40, justifyContent: 'center', alignItems: 'center'}}>
                 <Link href="/splitandcombine">
                     <Button mode="contained" buttonColor='#394d46'>Back</Button>
                 </Link>
-            </View>
+                <Button onPress={() => supabase.auth.signOut()} mode='contained' buttonColor="#ff6961" style={{marginTop: 10}}>Logout</Button>
                             
+            </View>
+
+            
             
         </View>
     )
