@@ -6,8 +6,8 @@ import { supabase } from '../lib/supabase';
 
 
 export default function Total() {
-    const [total, setTotal] = useState(0)
-    const [menus, setMenus] = useState([])
+    const [total, setTotal] = useState(0);
+    const [menus, setMenus] = useState([]);
     const fetchData = async () => {
 
         try {
@@ -22,6 +22,8 @@ export default function Total() {
     } 
 
     useEffect(() => {fetchData()}, []);
+    
+    
     
     return (
 
@@ -61,7 +63,7 @@ export default function Total() {
                  supabase.auth.signOut()} mode='contained' buttonColor="#ff6961" style={{marginBottom: 20}}>Logout</Button>
                 <Image 
                     style={{height: 20, width: 100, marginBottom: 30}}
-                    source={{uri: "/Users/evandarrenchristanto/Downloads/splitrr.jpeg"}}/>
+                    source={require('../assets/splitrr.jpeg')}/>
 
             </View>
             
