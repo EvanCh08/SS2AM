@@ -8,6 +8,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function Menus() {
     const [data, setData] = useState([]);
+   
     const fetchData2 = async () => {
         try {
             const durdul = await AsyncStorage.getItem('restId');
@@ -18,20 +19,16 @@ export default function Menus() {
     
             if (error) {
                 console.log(error);
-                // Handle the error
             } else {
                 setData(data)
-                // Process the data
             }
         } catch (error) {
             console.log(error);
-            // Handle any other errors that occurred during the execution
         }
         
 
     }
 
-    //useEffect(() => {fetchData()}, []);
     useEffect(() => {fetchData2()}, []);
     
 
