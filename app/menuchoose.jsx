@@ -9,22 +9,8 @@ import { useRoute } from '@react-navigation/native';
 
 export default function Menus() {
     const [data, setData] = useState([]);
-    //const [temp, setTemp] = useState([])
-    //const [finalData, setFinalData] = useState([{menu: "Ayam", price: "5"}, {menu: "Janggut", price: "5"}])
     const route = useRoute();
     const { customerId } = route.params;
-
-
-    const fetchData =  async () => {
-
-        const durdul = await AsyncStorage.getItem('restId')
-        console.log(durdul)
-        const userData = JSON.parse(await AsyncStorage.getItem(durdul))
-        setData(userData)
-        return userData;
-        
-    }
-
     const fetchData2 = async () => {
         try {
             const durdul = await AsyncStorage.getItem('restId');
@@ -48,10 +34,8 @@ export default function Menus() {
 
     }
 
-    //useEffect(() => {fetchData()}, []);
     useEffect(() => {fetchData2()}, []);
     
-
     const increaseCounter = useCallback((index) => {
         setData((prevData) => {
           const newData = [...prevData];
@@ -74,13 +58,6 @@ export default function Menus() {
         } catch (error) {
             console.log(error)
         }
-    }
-
-    const saveData = async () => {
-        const tuyul = await AsyncStorage.getItem('restId')
-        await AsyncStorage.setItem(tuyul, JSON.stringify(data))
-        const userData = JSON.parse(await AsyncStorage.getItem(tuyul))
-        console.log(userData)
     }
 
 
@@ -127,7 +104,7 @@ export default function Menus() {
             <View style={{marginBottom: 20}}>
 
                 <Link href="/allcustomers">
-                    <Button  mode="contained" buttonColor='#394d46'>Back to allcustomers</Button>
+                    <Button  mode="contained" buttonColor='#394d46'>Back to Customer List</Button>
                 </Link>
             </View>
             
