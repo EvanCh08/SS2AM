@@ -17,11 +17,9 @@ export default function Confirm() {
               if (Array.isArray(parsedData)) {
                 setCustomers(parsedData);
               } else {
-                // Handle non-array data from AsyncStorage
                 console.log('Data retrieved from AsyncStorage is not an array:', parsedData);
               }
             } else {
-              // Handle case when data is not found in AsyncStorage
               console.log('Data not found in AsyncStorage');
             }
           } catch (error) {
