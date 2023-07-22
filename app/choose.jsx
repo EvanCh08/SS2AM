@@ -10,7 +10,7 @@ function TopView() {
         <View style={{margin:40, flexDirection: 'row', backgroundColor: "#e4e7d1"}}>
             <Image 
                 style={{height: 80, width: 350, marginLeft: 15, marginTop: 10}}
-                source={{uri: "/Users/evandarrenchristanto/Downloads/splitrr.jpeg"}}/>
+                source={require('../assets/splitrr.jpeg')}/>
         </View>
     )
 }
