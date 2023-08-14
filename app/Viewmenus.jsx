@@ -17,7 +17,7 @@ export default function ViewMenu() {
                 .select('menu, price, counter')
                 .eq('uniqueId', durdul);
             
-            console.log(data)
+            //console.log(data)
             if (error) {
                 console.log(error);
             } else {
